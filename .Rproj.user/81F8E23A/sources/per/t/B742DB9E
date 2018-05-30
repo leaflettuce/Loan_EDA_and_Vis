@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1527099701283.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1204204691",
+    "id" : "B742DB9E",
+    "lastKnownWriteTime" : 1527708833,
+    "last_content_update" : 1527708833860,
+    "path" : "D:/Projects/SNHU/loans/exploration.R",
+    "project_path" : "exploration.R",
+    "properties" : {
+        "cursorPosition" : "295,0",
+        "scrollLine" : "280",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,65 @@
+Andrew Trick
+Visual exploration and analysis of loan data
+SNHU | DAT-410
+-------
+-------
+
+
+Cleaning Notes (R)
+----
+debt to income- drop '%', set at float
+emp_length- edited to continuous 1-10
+grade- ordinal levels set
+
+emp_length
+1->  (n/a)
+2->  (< 1)
+3->  (1)
+4->  (2)
+5->  (3)
+6->  (4)
+7->  (5)
+8->  (6)
+9->  (7)
+10-> (8)
+11-> (9)
+12-> (10+)
+
+-job titles aggregated in python- vacuum.py
+--> unrealistic (company not positions)
+-numerous variables set to numeric
+-dropped % off interest rates
+
+-> aggregated reason for purchase
+---->into 9 categories
+
+
+
+subsets
+---
+tried normal mean and SD
+tried logging out due to skewness
+--> no good, even more skewed
+checked mad
+checked quantile
+
+
+
+
+Relationships of interest
+----
+-range to use: (6,000 - 21,000) <<<<<<<<<<<<< [STORY]
+>>median and std ranges
+
+REJECTED REASONS
+-<1 emp length result in high rejection rates <<< [STORY]
+---> >10 approved almosty instantly (a jump)
+-rejected peaks at: 1
+-some debt ratings >9000 obvious no
+-RISK SCORE AROUND 675    <<<<<<<<<<<<<<<<<< [STORY]
+ >NORMAL DISTRO!!
+-state typical for populations
+APPROVED
+-slight incease to loan amount avg w/ emp length
+-Grade shows a drop after C <<<<<<<<<<<<<<<<<< [STORY]
+-installments normal central at $400
