@@ -52,6 +52,7 @@ Relationships of interest
 >>median and std ranges
 
 REJECTED REASONS
+-annual income to loan amount to term <<<<<<<<< [STORY]
 -<1 emp length result in high rejection rates <<< [STORY]
 ---> >10 approved almosty instantly (a jump)
 -rejected peaks at: 1

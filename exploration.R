@@ -219,12 +219,23 @@ ggplot(aes(x = State), data = range_rej) +
   ggtitle('amount by length')
 
 
+ggplot(aes(x = Debt.To.Income.Ratio, y = Risk_Score, color = Employment.Length), 
+       data = subset(range_rej, Debt.To.Income.Ratio <= 100)) +
+  geom_point(stat = 'identity', alpha = 0.1) +
+  ggtitle('debt to score')
+
 ############
 ##HISTO OF APPROVED
 ############
 ggplot(aes(x = emp_length), data = quantile_range) +
   geom_histogram(stat = 'count') +
   ggtitle('length hist')
+
+
+ggplot(aes(x = annual_inc), data = subset(quantile_range, annual_inc <= 200000)) +
+  geom_histogram() +
+  ggtitle('annual hist')
+
 
 ggplot(aes(x = loan_amnt), data = quantile_range) +
   geom_histogram() +
@@ -238,6 +249,11 @@ ggplot(aes(x = home_ownership), data = quantile_range) +
   geom_histogram(stat = 'count') +
   ggtitle('home hist')
 #
+ggplot(aes(x = home_ownership, y = loan_amnt), data = quantile_range) +
+  geom_jitter(alpha = 0.1, stat = 'identity') +
+  ggtitle('home hist')
+#
+
 ggplot(aes(x = grade), data = quantile_range) +
   geom_histogram(stat = 'count') +
   ggtitle('grade')
@@ -253,6 +269,11 @@ ggplot(aes(x = installment), data = quantile_range) +
 ggplot(aes(x = int_rate), data = quantile_range) +
   geom_histogram(stat = 'count') +
   ggtitle('int rate hist')
+
+ggplot(aes(x = annual_inc, y = loan_amnt, color = term), data = quantile_range) +
+  geom_point(stat = 'identity', alpha = 0.1) +
+  ggtitle('inc by amount by term') +
+  xlim(0, 300000)
 
 
 #lets clean and output a new file

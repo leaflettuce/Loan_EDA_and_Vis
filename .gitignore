@@ -1,6 +1,9 @@
 /data/*
+/post/*
+/imgs/*
 for_python.csv
 for_vis_approved.csv
 for_vis_rejected.csv
 loans_cleaned.csv
 .RData
+.Rproj.user
