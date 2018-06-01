@@ -16,11 +16,11 @@ df_reg <- df
 #grade to ordinal
 df_reg$grade <- as.integer(df_reg$grade)
 #employ length to ordinal
-df$emp_length <- factor(df$emp_length, levels = c("n/a", "< 1 year", "1 year", "2 years", 
+df_reg$emp_length <- factor(df$emp_length, levels = c("n/a", "< 1 year", "1 year", "2 years", 
                                                   "3 years", "4 years", "5 years",
                                                   "6 years", "7 years", "8 years",
                                                   "9 years", "10+ years"))
-df_reg$emp_length <- as.integer(df_reg$emp_length)
+df_reg$emp_length_int <- as.integer(df_reg$emp_length)
 #drop other categoricals
 df_reg <- subset(df_reg, select = -c(?..id, member_id, emp_title, title, addr_state, 
                                   sub_grade, int_rate, installment, funded_amnt))
@@ -201,7 +201,7 @@ range_rej$Employment.Length <- factor(range_rej$Employment.Length, levels = c("n
                                                   "3 years", "4 years", "5 years",
                                                   "6 years", "7 years", "8 years",
                                                   "9 years", "10+ years"))
-range_rej$Employment.Length <- as.integer(range_rej$Employment.Length)
+range_rej$Employment.Length.Int <- as.integer(range_rej$Employment.Length)
 
 ggplot(aes(x = Debt.To.Income.Ratio), data = subset(range_rej, Debt.To.Income.Ratio > 0 & 
                                                       Debt.To.Income.Ratio < 100)) +
@@ -301,7 +301,8 @@ ggplot(aes(x = title), data = df2) +
 
 #make changes to range
 quantile_range2 <- subset(df2, loan_amnt >= 6000 & loan_amnt <= 21000)
-
+names(quantile_range2)[names(quantile_range2) == 'emp_length'] <- 'emp_length_int'
+quantile_range2$emp_length <- quantile_range$emp_length
 
 l1 <- ggplot(aes(x = title, y = loan_amnt, color = int_rate), data =df2) +
   geom_jitter(stat = 'identity', alpha = 0.1) +
@@ -316,3 +317,24 @@ grid.arrange(l1, l2, ncol = 1)
 #WRITE CLEANED FILES
 write.csv(quantile_range2, file = "D://projects/SNHU/loans/for_vis_approved.csv", row.names = FALSE)
 write.csv(range_rej, file = "D://projects/SNHU/loans/for_vis_rejected.csv", row.names = FALSE)
+write.csv(df_comb, file = "D://projects/SNHU/loans/for_vis_combined.csv", row.names = FALSE)
+
+
+
+####logisitic regression of EMP LENGTH
+df_comb$result <- revalue(df_comb$result, c("approved"= 1, 'rejected' = 0))
+df_comb$result <- as.integer(df_comb$result)
+df_comb$emp_length <- factor(df_comb$emp_length, levels = c("n/a", "< 1 year", "1 year", "2 years", 
+                                                  "3 years", "4 years", "5 years",
+                                                  "6 years", "7 years", "8 years",
+                                                  "9 years", "10+ years"))
+df_comb$emp_length_int <- as.integer(df_comb$emp_length)
+
+logreg <- glm(formula = result ~ emp_length, family = binomial(link = "logit"), 
+    data = df_comb)
+
+summary(logreg)
+ggplot(df_comb, aes(x=emp_length, y=result)) +
+  geom_smooth(data = df_comb, aes(x = emp_length, y = result),
+              method = "glm", method.args = list(family = "binomial"), 
+              se = FALSE)
