@@ -329,6 +329,7 @@ df_comb$emp_length <- factor(df_comb$emp_length, levels = c("n/a", "< 1 year", "
                                                   "6 years", "7 years", "8 years",
                                                   "9 years", "10+ years"))
 df_comb$emp_length_int <- as.integer(df_comb$emp_length)
+df_comb <- subset(df_comb, loan_amnt >= 6000 & loan_amnt <= 21000)
 
 logreg <- glm(formula = result ~ emp_length, family = binomial(link = "logit"), 
     data = df_comb)
