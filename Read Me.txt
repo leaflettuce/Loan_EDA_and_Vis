@@ -4,63 +4,68 @@ SNHU | DAT-410
 -------
 -------
 
-
-Cleaning Notes (R)
-----
-debt to income- drop '%', set at float
-emp_length- edited to continuous 1-10
-grade- ordinal levels set
-
-emp_length
-1->  (n/a)
-2->  (< 1)
-3->  (1)
-4->  (2)
-5->  (3)
-6->  (4)
-7->  (5)
-8->  (6)
-9->  (7)
-10-> (8)
-11-> (9)
-12-> (10+)
-
--job titles aggregated in python- vacuum.py
---> unrealistic (company not positions)
--numerous variables set to numeric
--dropped % off interest rates
-
--> aggregated reason for purchase
----->into 9 categories
-
-
-
-subsets
 ---
-tried normal mean and SD
-tried logging out due to skewness
---> no good, even more skewed
-checked mad
-checked quantile
+./data
+---
+All data files used throughout project.
+for_vis 	- final versions used in Tableau
+for_python      - used for reason classificationin py
 
 
+---
+./imgs
+---
+All images used throughout the project.
 
 
-Relationships of interest
-----
--range to use: (6,000 - 21,000) <<<<<<<<<<<<< [STORY]
->>median and std ranges
+---
+exploration.R
+---
+Data formatting and cleaning
+	-Mostly minor numeric setting and ordinal ranking.
+	-connected the two datasets into a 'combined' on emp_length
+	
+Exploratory Data Analysis
+	-explored loan range possibilities.
+	-numerous visual examinations in ggplot.
+	-multi-linear regression.
+	-logistic regression on emp _length.
 
-REJECTED REASONS
--annual income to loan amount to term <<<<<<<<< [STORY]
--<1 emp length result in high rejection rates <<< [STORY]
----> >10 approved almosty instantly (a jump)
--rejected peaks at: 1
--some debt ratings >9000 obvious no
--RISK SCORE AROUND 675    <<<<<<<<<<<<<<<<<< [STORY]
- >NORMAL DISTRO!!
--state typical for populations
-APPROVED
--slight incease to loan amount avg w/ emp length
--Grade shows a drop after C <<<<<<<<<<<<<<<<<< [STORY]
--installments normal central at $400
+NOTE: This file will not output correctly cleaned files if run linearly. 
+      While I tried to keep it clean and organized, jumping back and forth
+      in python and excel working with the data caused a bit of an unorganized 
+      mess at the end. All visuals should still read out fine though!
+
+---
+Exploration.twb
+---
+Tableau file in which both further exploration and final visual creation was
+conducted. Blue highlighted tabs indicate usage in final report/presentation.
+
+
+---
+vacuum.py
+---
+Python file used for classifying free-form reason column into categories.
+NOTE: As with any nlp, this was a pretty manual process; After a quick eval of
+      the col entries I made a dictionary of stemmed words which relate to each
+      of the 8 most frequent categories. Iterating this process led to the 
+      collection of stemmed words for each dictionary key. Other was used for 
+      any remainders.
+
+
+---
+other files
+---
+loans.R		 - R project file
+.gitignore       - for github
+.Rhistory        - R workspace save
+
+
+---
+Other Notes
+---
+*If running locally, tweaks to the data import lines may be needed. I ran most
+      of these before collecting the data into the ./data dir.
+*I named the python file after my favorite cleaning appliance (~_^)
+
