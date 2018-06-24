@@ -42,6 +42,9 @@ Exploration.twb
 Tableau file in which both further exploration and final visual creation was
 conducted. Blue highlighted tabs indicate usage in final report/presentation.
 
+NOTE: THIS IS THE DASHBOARD REFERENCED IN PRESENTATION. TO BE EMAILED OUT TO
+      AUDIENCE AFTER REPORT.
+
 
 ---
 vacuum.py
